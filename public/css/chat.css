@@ -1,0 +1,57 @@
+.textCenter{
+/*    left : 40%;*/
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    padding-bottom: 15px;
+/*    text-align: center;*/
+/*    width: 400px;*/
+}
+.form {
+    background-color: aquamarine;
+}
+.pageColor{
+    background-color: #000;
+}
+.userFont{
+    font-family: fantasy;
+    font-size: 200%;
+}
+.onlineUser {
+    font-family: fantasy;
+    font-size: 125%;
+    padding-left: 6%;
+    padding-top: 4%;
+}
+.usersList{
+    position:absolute; 
+    top:20%;
+    left:80%
+}
+.userListFont{
+     font-family:sans-serif;
+     font-size: 150%;
+}
+.ikonPadding {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.glyphicon.glyphicon-remove {
+    font-size: 26px;
+}
+.closeChat {
+/*    position: fixed;*/
+    padding-left:14%;
+    
+}
+.chatArea {
+    width: 200px;
+}
+.chatWindow {
+    height: 200px;
+}
+
+
+

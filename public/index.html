@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html ng-app="acsApp">
+
+    <head>
+        <title>Chat Box</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- disable browser cache -->
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 2022 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
+        
+<!--
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
+-->
+<!--        <link rel="stylesheet" href="css/libs.min.css"/>-->
+        <link rel="stylesheet" href="css/angular-csp.css"/>
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/chat.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+    
+        
+    </head>
+
+     <body>
+         
+         
+<!--
+        <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="lib/jquery-ui.js"></script>
+        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+
+-->
+        <script type="text/javascript" src="lib/angular.min.js"></script>
+        <script type="text/javascript" src="lib/angular-route.js"></script>
+		<script type="text/javascript" src="js/modules/app.js"></script>
+         <script type="text/javascript" src="lib/lodash.js"></script>
+        
+         <!--   Controllers -->
+        <script type="text/javascript" src="js/modules/login/loginController.js"></script>
+         <script src="js/modules/factory/dataService.js"></script>
+         <script src="js/modules/factory/chatService.js"></script>
+         <script src="js/modules/factory/sharedService.js"></script>
+        <script type="text/javascript" src="js/modules/chat/chatController.js"></script>
+         
+        
+        <div ng-view="" class="height100"></div>
+        <script type="text/ng-template" id="/login.html">
+            <div ng-include="'js/modules/login/login.html'"></div>
+        </script>
+         
+        <script type="text/ng-template" id="/chat.html">
+            <div ng-include="'js/modules/chat/chat.html'"></div>
+        </script>
+
+     </body>
+
+</html>

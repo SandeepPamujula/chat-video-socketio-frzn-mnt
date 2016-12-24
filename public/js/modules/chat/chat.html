@@ -1,0 +1,25 @@
+<div ng-controller='chatController'>
+    <div >
+        <li class="login page">
+            <div class="textCenter"> <span class="userFont">  {{user}} </span> <span> online </span> </div>
+        </li>    
+    </div>
+
+    <div class="usersList chatArea" >
+        <div class="userListFont"> Logged in Users </div>
+        <div class="onlineUser" ng-repeat="user in onlineUsers" >
+            {{user}} 
+            <span ng-click=startChat(user) class="ikonPadding glyphicon glyphicon-comment"></span>
+            <span ng-click=startVideo(user) class=" ikonPadding glyphicon glyphicon-facetime-video"></span>
+        </div>
+        <br><br>
+        <div ng-show="showChat">
+            <div> chat with <strong> {{whomToChat}} </strong> <span ng-click=stopChat() class=" closeChat glyphicon glyphicon-remove"></span> </div>
+            <textarea ng-bind="allChatText" class="chatWindow chatArea" ng-readonly="true"></textarea>
+            <textarea class="chatArea" autofocus ng-model="chatText" ng-keyup="$event.keyCode == 13 && sendText()"></textarea>
+        </div>
+        
+    </div>
+    
+    
+</div>

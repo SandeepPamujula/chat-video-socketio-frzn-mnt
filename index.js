@@ -1,0 +1,72 @@
+'use strict';
+
+
+
+const express = require('express');
+let app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const port = 8888;
+const _ = require('lodash');
+
+let clients = {};
+
+app.use(express.static(__dirname+'/public'));
+
+console.log(__dirname+'/public');
+
+
+
+io.on('connection',function(client){
+    
+    console.log('------------------------------------');
+    console.log('connection ');
+//    console.dir(client);
+    
+   client.on('add-user',function(username){
+       
+       console.log('add-user '+ username);
+        clients[username] = {
+          "socket": client.id
+        };  
+       client.emit('login', {
+            username : username,
+            clients : clients
+        });
+       console.log(JSON.stringify(clients));
+        // echo globally (all clients) that a person has connected
+        client.broadcast.emit('online-users', {
+          clients : clients
+        });
+       
+   });
+    
+   client.on('logout',function(username){
+       console.log('logout '+ username);
+       clients = _.omit(clients,[username]);
+       console.log(JSON.stringify(clients));
+        client.broadcast.emit('online-users', {
+          clients : clients
+        });
+       
+   });
+    
+   client.on('private-message', function (data) {
+       if ( clients[data.username] ){
+            var clientSock = clients[data.username].socket;
+            if ( io.sockets.connected[clientSock] ){
+                io.sockets.connected[clientSock].emit("private-message",  {
+                                      sendername: data.sendername,
+                                      message: data.message
+                                });
+            }
+
+       }
+            
+   });
+    
+});
+
+server.listen(port, function(){
+    console.log('server listening on '+ port);
+});
