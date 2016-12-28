@@ -65,6 +65,20 @@ io.on('connection',function(client){
             
    });
     
+   client.on('video-chat', function (data) {
+       if ( clients[data.client] ){
+            var clientSock = clients[data.client].socket;
+            if ( io.sockets.connected[clientSock] ){
+                io.sockets.connected[clientSock].emit("video-chat",  {
+                                      sendername: data.sendername,
+                                      sessionID: data.sessionID
+                                });
+            }
+
+       }
+            
+   });
+    
 });
 
 server.listen(port, function(){

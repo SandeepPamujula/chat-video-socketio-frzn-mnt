@@ -1,11 +1,27 @@
-<div ng-controller='chatController'>
+<!--<div ng-controller='chatController'>-->
+<div>
     <div >
         <li class="login page">
             <div class="textCenter"> <span class="userFont">  {{user}} </span> <span> online </span> </div>
         </li>    
     </div>
-
+    <div class="videoWindow">
+<!--
+        <div class="border">
+            <video id="videoID" src="{{videoSrc}}" autoplay height="500px" width="800px">
+            </video>
+        
+        </div>
+-->
+     <div id="videoChat">
+<!--        <div id="loading"></div>-->
+        <div id="videoID" class="border"></div>
+    </div>
+        
+    </div>
     <div class="usersList chatArea" >
+        
+        <div class="userListFont">{{sessionID}}  </div>
         <div class="userListFont"> Logged in Users </div>
         <div class="onlineUser" ng-repeat="user in onlineUsers" >
             {{user}} 
@@ -16,7 +32,7 @@
         <div ng-show="showChat">
             <div> chat with <strong> {{whomToChat}} </strong> <span ng-click=stopChat() class=" closeChat glyphicon glyphicon-remove"></span> </div>
             <textarea ng-bind="allChatText" class="chatWindow chatArea" ng-readonly="true"></textarea>
-            <textarea class="chatArea" autofocus ng-model="chatText" ng-keyup="$event.keyCode == 13 && sendText()"></textarea>
+            <textarea class="chatArea" autofocus ng-model="chat.chatText" ng-keyup="$event.keyCode == 13 && sendText()"></textarea>
         </div>
         
     </div>

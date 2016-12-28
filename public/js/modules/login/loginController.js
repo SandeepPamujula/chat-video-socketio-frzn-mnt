@@ -8,7 +8,7 @@ app.controller('loginController', ['$scope','$location','dataService', 'chatServ
          $scope.userName = dataService.getUserName();
 
             $scope.login = function() {
-                console.log($scope.userName);
+                console.log('--> '+ $scope.userName);
                 dataService.setUserName($scope.userName);
                 chatService.addUser($scope.userName);
                 $location.path('/chat');

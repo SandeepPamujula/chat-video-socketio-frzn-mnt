@@ -6,7 +6,7 @@ app.service("chatService",["$http","$rootScope", "sharedService",
     var socket = io();
     var connected = false;
     var userName = '';
-    
+    var videoChat = false;
 //    var myInjector = angular.injector(["ng"]);
 //    var $rootscope = myInjector.get("$rootscope");
     
@@ -36,11 +36,24 @@ app.service("chatService",["$http","$rootScope", "sharedService",
             socket.emit('private-message',data);   
          }
     };
+    chatServices.startVideoChat = function (client, sessionID) {
+         if ( socket && connected && !videoChat ){
+             videoChat = !videoChat;
+             var data = {
+                        sendername : userName,
+                        client: client,
+                        sessionID: sessionID
+                     };
+
+            socket.emit('video-chat',data);   
+         }
+    };
     chatServices.logout = function () {
-   
+    
         connected = false;
         socket.emit('logout', userName); 
         userName = '';
+        alert('logout '+userName);
  
    };
     
@@ -49,7 +62,7 @@ app.service("chatService",["$http","$rootScope", "sharedService",
         userName = data.username;
         var onlineUsers = data.clients;
         var keys = Object.keys(onlineUsers);
-        sharedService.broadcastOnlineUsers(keys);
+        sharedService.broadcastLoginUsers(keys);
         console.log('login chat service: ');
 
         console.log(keys);
@@ -71,6 +84,14 @@ app.service("chatService",["$http","$rootScope", "sharedService",
        sharedService.prepForBroadcast(data);
     
    });
+      
+   socket.on('video-chat', function (data) {
+       console.log('video-chat : '+JSON.stringify(data));
+       sharedService.broadcastVideoChat(data);
+    
+   });
+    
+                               
 
    return chatServices;
 }]);
