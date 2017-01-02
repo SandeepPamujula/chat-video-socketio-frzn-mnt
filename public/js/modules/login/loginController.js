@@ -5,12 +5,13 @@ app.controller('loginController', ['$scope','$location','dataService', 'chatServ
      function($scope, $location, dataService, chatService ) {
 
          console.log('loginController called ');
-         $scope.userName = dataService.getUserName();
+         $scope.user = {};
+         $scope.user.userName = dataService.getUserName();
 
             $scope.login = function() {
-                console.log('--> '+ $scope.userName);
-                dataService.setUserName($scope.userName);
-                chatService.addUser($scope.userName);
+                console.log('--> '+ $scope.user.userName);
+                dataService.setUserName($scope.user.userName);
+                chatService.addUser($scope.user.userName);
                 $location.path('/chat');
                 console.log(dataService.getUserName());
             };

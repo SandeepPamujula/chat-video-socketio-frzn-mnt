@@ -1,6 +1,7 @@
 <!--<form ng-controller="loginController">-->
 
-<div ng-controller='loginController'>
+<!-- <div ng-controller='loginController'> -->
+<div>
 
  <ul class="pages">
 <!--
@@ -15,7 +16,7 @@
         <li class="login page">
           <div class="form">
             <h3 class="title">What's your nickname?</h3>
-            <input ng-keyup="$event.keyCode == 13 && login()" class="usernameInput" autofocus type="text" maxlength="14" ng-model="userName" />
+            <input ng-keyup="$event.keyCode == 13 && login()" class="usernameInput" autofocus type="text" maxlength="14" ng-model="user.userName" />
           </div>
         </li>
     </div> 

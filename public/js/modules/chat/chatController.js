@@ -1,33 +1,19 @@
 
 'use strict';
 
-app.controller('chatController', ['$scope', '$rootScope', '$location','$window', 'dataService','sharedService', 'chatService', 'fmService', function($scope, $rootScope, $location, $window, dataService, sharedService, chatService, fmService ) {
+app.controller('chatController', ['$scope', '$rootScope', '$location','$window', 'dataService','sharedService', 'chatService', 'fmService','unloadService', function($scope, $rootScope, $location, $window, dataService, sharedService, chatService, fmService, unloadService ) {
          $scope.user = dataService.getUserName();
          $scope.showChat = false;
          $scope.chat = {};
          $scope.chat.chatText = '';
          $scope.whomToChat = undefined;
          $scope.allChatText = '';
-//         var appFM = '';
          console.log(' *** chatController called 1');
     
-        console.log(' *** chatController called 2');
     
-        var onExit = function () {
-            alert('logout '+userName);
-            chatService.logout();               
-        };
-    
-        $window.onbeforeunload =  onExit;
-    
-        $scope.$on('$stateChangeStart', function( event ) {
-            alert('$locationChangeStart');
-//            var answer = confirm("Are you sure you want to leave this page?")
-//            if (!answer) {
-//                event.preventDefault();
-//            }
+         $scope.$on('onBeforeUnload', function (e, confirmation) {
+             chatService.logout();
         });
-                                  
                                   
         $scope.$on('chat-user', function() {
             
@@ -63,10 +49,11 @@ app.controller('chatController', ['$scope', '$rootScope', '$location','$window',
             });
             
         });
+        console.log(' *** chatController called 2');
         $scope.videoOnline = false;
         $scope.$on('online-video',function(){
            console.log('online-video: chat controller: 1 '+$scope.videoOnline);
-            if ( $scope.videoOnline == false ){
+            // if ( $scope.videoOnline == false ){
                 
                 $scope.videoOnline = true;
                 
@@ -76,7 +63,7 @@ app.controller('chatController', ['$scope', '$rootScope', '$location','$window',
                 $scope.$apply(function(){
                     $scope.startVideo(videoData.sendername,videoData.sessionID);
                 });
-            }
+            // }
             
             
         });

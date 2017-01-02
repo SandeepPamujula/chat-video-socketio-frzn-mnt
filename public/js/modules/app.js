@@ -17,7 +17,7 @@ app.config(function ($routeProvider) {
             })
         .when('/chat',
             {
-                controller: 'chatController',
+//                controller: 'chatController',
                 templateUrl: '/chat.html'
             })
         

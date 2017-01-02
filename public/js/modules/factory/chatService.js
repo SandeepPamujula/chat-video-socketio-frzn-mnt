@@ -36,9 +36,10 @@ app.service("chatService",["$http","$rootScope", "sharedService",
             socket.emit('private-message',data);   
          }
     };
+    // chatServices.stopChat = function
     chatServices.startVideoChat = function (client, sessionID) {
-         if ( socket && connected && !videoChat ){
-             videoChat = !videoChat;
+         if ( socket && connected ){
+             // videoChat = !videoChat;
              var data = {
                         sendername : userName,
                         client: client,
@@ -48,6 +49,7 @@ app.service("chatService",["$http","$rootScope", "sharedService",
             socket.emit('video-chat',data);   
          }
     };
+
     chatServices.logout = function () {
     
         connected = false;
@@ -62,7 +64,8 @@ app.service("chatService",["$http","$rootScope", "sharedService",
         userName = data.username;
         var onlineUsers = data.clients;
         var keys = Object.keys(onlineUsers);
-        sharedService.broadcastLoginUsers(keys);
+        setTimeout(function(){ sharedService.broadcastLoginUsers(keys);}, 1000);
+        
         console.log('login chat service: ');
 
         console.log(keys);
