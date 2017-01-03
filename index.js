@@ -4,10 +4,24 @@
 
 const express = require('express');
 let app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+//const server = require('http').createServer(app);
+const fs = require('fs');
+const https = require('https');
+
+
+
+
+
 const port = 8080;
 const _ = require('lodash');
+
+ var options = {
+      key: fs.readFileSync('./sslcert/key.pem', 'utf8'),
+      cert: fs.readFileSync('./sslcert/server.crt', 'utf8')
+   };
+var httpsServer = https.createServer(options, app);
+const io = require('socket.io')(httpsServer);
+//const io = require('socket.io')(server);
 
 let clients = {};
 
@@ -81,6 +95,9 @@ io.on('connection',function(client){
     
 });
 
-server.listen(port, function(){
-    console.log('server listening on '+ port);
+//server.listen(port, function(){
+//    console.log('server listening on '+ port);
+//});
+httpsServer.listen(port,function(){
+    console.log('https server listening on '+ port);
 });
